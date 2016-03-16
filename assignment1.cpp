@@ -44,5 +44,37 @@ template <class T>
 SimpleList<T>::Node::Node(T input)
 {
 	value = input;
-	next = 0;
+	//next = 0;
 }
+
+template <class T>
+class Stack: public SimpleList<T>
+{
+	public:
+	T pop()
+	{
+	
+	};
+	void push(T input)
+	{
+	
+	};
+	Stack(string inputname):SimpleList<T>(inputname){};
+};
+
+template <class T>
+class Queue: public SimpleList<T>
+{
+	public:
+	T pop()
+	{
+
+	};
+	void push(T input)
+	{
+
+	};
+	Queue(string inputname):SimpleList<T>(inputname){};
+};
+
+
