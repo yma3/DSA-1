@@ -1,30 +1,34 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
 template <class T>
 class SimpleList
 {
-	protected:
-	string name;
-	int size;
+protected:
+	static vector<string> UsedNames;
+	int nameIndex;
+	int size;	
+
 	class Node 
 	{
-		public:
+	public:
 		T info;
 		Node* pNext;
 		Node(T input);
 	};
+
 	Node* pRoot;
 	Node* pEnd;
 	
-	public:
+public:
 	virtual T pop() = 0;
 	virtual void push(T input) = 0;
 	string getname()
 	{
-		return name;
+		return UsedNames[nameIndex];;
 	};
 	int getsize()
 	{
@@ -36,7 +40,16 @@ class SimpleList
 template <class T>
 SimpleList<T>::SimpleList(string inputname)
 {
-	name = inputname;
+	for(int i = 0; i < UsedNames.size(); i++)
+	{
+		if(inputname == UsedNames[i])
+		{
+			throw exception();
+		}
+	}
+
+	nameIndex = UsedNames.size();
+	UsedNames.push_back(inputname);
 	size = 0;
 	pRoot = pEnd = 0;
 }
@@ -44,7 +57,7 @@ SimpleList<T>::SimpleList(string inputname)
 template <class T>
 SimpleList<T>::Node::Node(T input)
 {
-	value = input;
+	info = input;
 	pNext = 0;
 }
 
@@ -54,6 +67,10 @@ class Stack: public SimpleList<T>
 	public:
 	T pop()
 	{
+		if(this->size == 0)
+		{
+			throw exception();
+		} 
 		T popdata = this->pRoot->info;
 		class SimpleList<T>::Node* hold = this->pRoot;
 		this->pRoot = hold->pNext;
@@ -84,6 +101,10 @@ class Queue: public SimpleList<T>
 	public:
 	T pop()
 	{
+		if(this->size == 0)
+		{
+			throw exception();
+		}
 		T popdata = this->pRoot->info;
 		class SimpleList<T>::Node* hold = this->pRoot;
 		this->pRoot = hold->pNext;
@@ -93,7 +114,7 @@ class Queue: public SimpleList<T>
 	};
 	void push(T input)
 	{
-		class SimpleList<T>::Node* hold = new classs SimpleList<T>::Node(input);
+		class SimpleList<T>::Node* hold = new class SimpleList<T>::Node(input);
 		if(this->size == 0)
 		{
 			this->pRoot = this->pEnd = hold;
@@ -108,4 +129,8 @@ class Queue: public SimpleList<T>
 	Queue(string inputname):SimpleList<T>(inputname){};
 };
 
-i
+int main()
+{
+	
+	return 0;
+}
