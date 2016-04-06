@@ -108,4 +108,4 @@ class Queue: public SimpleList<T>
 	Queue(string inputname):SimpleList<T>(inputname){};
 };
 
-
+i
